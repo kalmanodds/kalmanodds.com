@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/rss": "^4.0.15",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.1",
     "@types/react-dom": "^19.2.3",
