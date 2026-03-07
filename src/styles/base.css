@@ -1,62 +1,89 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-mono: "IBM Plex Mono", monospace;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+}
+
+@theme inline {
+  /* Skin colors mapped from CSS custom properties */
+  --color-skin-fill: var(--color-fill);
+  --color-skin-accent: var(--color-accent);
+  --color-skin-base: var(--color-text-base);
+  --color-skin-inverted: var(--color-fill);
+  --color-skin-card: var(--color-card);
+  --color-skin-card-muted: var(--color-card-muted);
+  --color-skin-line: var(--color-border);
+
+  /* Tag colors */
+  --color-tag-astro: var(--color-tag-astro);
+  --color-tag-docker: var(--color-tag-docker);
+  --color-tag-nextjs: var(--color-tag-nextjs);
+  --color-tag-postgres: var(--color-tag-postgres);
+  --color-tag-tailwindcss: var(--color-tag-tailwindcss);
+  --color-tag-typescript: var(--color-tag-typescript);
+}
 
 @layer base {
   :root,
   html[data-theme="dark"] {
-    --color-fill: 33, 39, 42;
-    --color-text-base: 234, 237, 243;
-    --color-accent: 255, 180, 1;
-    --color-card: 52, 63, 96;
-    --color-card-muted: 138, 51, 2;
-    --color-border: 171, 130, 8;
-    --color-tag-astro: 255, 86, 6;
-    --color-tag-docker: 29, 99, 237;
-    --color-tag-nextjs: 20, 20, 20;
-    --color-tag-postgres: 51, 103, 145;
-    --color-tag-tailwindcss: 22, 190, 203;
-    --color-tag-typescript: 49, 120, 198;
+    --color-fill: rgb(33 39 42);
+    --color-text-base: rgb(234 237 243);
+    --color-accent: rgb(255 180 1);
+    --color-card: rgb(52 63 96);
+    --color-card-muted: rgb(138 51 2);
+    --color-border: rgb(171 130 8);
+    --color-tag-astro: rgb(255 86 6);
+    --color-tag-docker: rgb(29 99 237);
+    --color-tag-nextjs: rgb(20 20 20);
+    --color-tag-postgres: rgb(51 103 145);
+    --color-tag-tailwindcss: rgb(22 190 203);
+    --color-tag-typescript: rgb(49 120 198);
   }
   body {
-    @apply flex min-h-screen flex-col bg-skin-fill font-mono text-skin-base 
-    selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
+    @apply flex min-h-screen flex-col bg-skin-fill font-mono text-skin-base
+    selection:bg-skin-accent/70 selection:text-skin-inverted;
   }
   section,
   footer {
     @apply mx-auto max-w-3xl px-4;
   }
   a {
-    @apply outline-2 outline-offset-1 outline-skin-fill 
+    @apply focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-skin-accent
     focus-visible:no-underline focus-visible:outline-dashed;
   }
   svg {
     @apply inline-block h-6 w-6 fill-skin-base group-hover:fill-skin-accent;
   }
   svg.icon-tabler {
-    @apply inline-block h-6 w-6 scale-125 fill-transparent 
-    stroke-current stroke-2 opacity-90 group-hover:fill-transparent 
+    @apply inline-block h-6 w-6 scale-125 fill-transparent
+    stroke-current stroke-2 opacity-90 group-hover:fill-transparent
     sm:scale-110;
   }
   .prose {
-    @apply prose-headings:!mb-3 prose-headings:!text-skin-base 
-    prose-h3:italic prose-p:!text-skin-base 
+    @apply prose-headings:!mb-3 prose-headings:!text-skin-base
+    prose-h3:italic prose-p:!text-skin-base
     prose-a:!text-skin-base prose-a:!decoration-dashed prose-a:underline-offset-8
-    hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent
-    prose-blockquote:border-opacity-50 prose-blockquote:opacity-80
+    hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent/50
+    prose-blockquote:opacity-80
     prose-figcaption:!text-skin-base prose-figcaption:opacity-70
     prose-strong:!text-skin-base
 
-    
-    prose-code:rounded prose-code:bg-skin-card 
-    prose-code:bg-opacity-75 prose-code:p-1 prose-code:!text-skin-base 
+
+    prose-code:rounded prose-code:bg-skin-card/75
+    prose-code:p-1 prose-code:!text-skin-base
     prose-code:before:!content-[''] prose-code:after:!content-['']
-    prose-pre:!text-skin-base prose-ol:!text-skin-base 
+    prose-pre:!text-skin-base prose-ol:!text-skin-base
     prose-ul:overflow-x-clip prose-ul:!text-skin-base prose-li:marker:!text-skin-accent
     prose-table:text-skin-base prose-th:border
-    prose-th:border-skin-line prose-td:border 
-    prose-td:border-skin-line prose-img:mx-auto 
-    prose-img:!mt-2 prose-img:border-2 
+    prose-th:border-skin-line prose-td:border
+    prose-td:border-skin-line prose-img:mx-auto
+    prose-img:!mt-2 prose-img:border-2
     prose-img:border-skin-line prose-hr:!border-skin-line;
   }
   .prose a {
@@ -74,7 +101,7 @@
     @apply inline-block cursor-pointer select-none text-skin-base;
   }
   .prose summary {
-    @apply focus-outline;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-skin-accent focus-visible:no-underline focus-visible:outline-dashed;
   }
   .prose h2#table-of-contents + p {
     @apply hidden;
@@ -116,6 +143,6 @@
     @apply hidden;
   }
   .focus-outline {
-    @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-skin-accent focus-visible:no-underline focus-visible:outline-dashed;
   }
 }

@@ -4,7 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime.astro";
-import type { CollectionEntry } from "astro:content";
+import { type CollectionEntry, render } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import { marked } from "marked";
 
@@ -17,7 +17,7 @@ const { project } = Astro.props;
 const { title, description, image, url, readmeUrl, publishedAt, tags } =
   project.data;
 
-const { Content } = await project.render();
+const { Content } = await render(project);
 
 const ogUrl = new URL(image ? image : `${title}.png`, Astro.url.origin)
   .href;
@@ -65,6 +65,7 @@ const readmeContent = marked.parse(readmeMarkdown);
 </Layout>
 
 <style>
+  @reference "../styles/base.css";
   main {
     @apply mx-auto w-full max-w-3xl px-4 pb-12;
   }
