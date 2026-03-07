@@ -42,6 +42,9 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,md,mdx,json}": [
       "prettier --write"
